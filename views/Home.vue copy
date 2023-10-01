@@ -1,0 +1,355 @@
+<template>
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="#" class="logo">
+                <img src="../assets/images/logo.png" alt="ابرکوین" style="max-width: 150px;">
+              </a>
+              <!-- ***** Logo End ***** -->
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section"><a href="#top" class="active">خانه</a></li>
+                <li class="scroll-to-section"><a href="#services">سوالات متداول</a></li>
+                <li class="scroll-to-section"><a href="#about">درباره ما</a></li>
+                <li class="scroll-to-section"><a href="#newsletter">تماس باما</a></li>
+                <li v-if="store.state.isAuthenticated">
+                  <div class="gradient-button">
+                    <router-link id="modal_trigger" to="/dashboard">
+                      <i class="fa fa-user-alt"></i>
+                      پنل کاربری
+                    </router-link>
+                  </div>
+              </li> 
+              </ul>        
+              <a class='menu-trigger' @click="menu_trigger">
+                  <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+  
+    
+    <iframe scrolling="no" allowtransparency="true" style="user-select: none; box-sizing: border-box; display: block; height: 46px; width: 100%; transform: translateY(100px);" src="https://s.tradingview.com/embed-widget/ticker-tape/?locale=en#{%22symbols%22:[{%22description%22:%22%22,%22proName%22:%22BINANCE:BTCUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:ETHUSDT%22},{%22description%22:%22%22,%22proName%22:%22COINBASE:USDTUSD%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:BNBUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:XRPUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:DOGEUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:ADAUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:SOLUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:TRXUSDT%22},{%22description%22:%22%22,%22proName%22:%22BINANCE:LTCUSDT%22}],%22showSymbolLogo%22:true,%22colorTheme%22:%22light%22,%22isTransparent%22:false,%22displayMode%22:%22adaptive%22,%22width%22:%22100%25%22,%22height%22:40}" frameborder="0"></iframe>
+  
+    <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+      <div class="container">
+  
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-6 align-self-center">
+                <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h2>ربات آربیتراژ ابرکوین</h2>
+                      <p>با ابرکوین به راحتی و بدون ریسک درآمد داشته باشید.</p>
+                    </div>
+                    <div class="col-lg-12" v-if="!store.state.isAuthenticated">
+                      <div class="white-button first-button scroll-to-section ms-2 me-0">
+                        <router-link to="/signin"> ورود </router-link>
+                      </div>
+                      <div class="white-button scroll-to-section me-0">
+                        <router-link to="/signup"> ثبت نام <i class="fa fa-sign-in-alt"></i></router-link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                  <img src="../assets/images/slider-dec.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div id="services" class="services section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+              <h4>معرفی ابرکوین</h4>
+              <img src="../assets/images/heading-line-dec.png" alt="">
+              <p> صرافی ابرکوین، از نخستین پلتفرم‌های ‌ارز دیجیتال ایرانی است که با ارائه خدمات متنوع و پشتیبانی ۲۴ ساعته، بروکری شفاف و امن برای مبادلات ارزهای دیجیتال و کسب سود از این بازار جهانی است. </p>
+              <p> ابرکوین با استفاده از کارشناسان و متخصصان حوزه‌ی کریپتوکارنسی، به یکی از پیشگامان و اثرگذاران بر بازار ارزهای دیجیتال تبدیل شده و ربات آربیتراژ آن، روشی مطمئن برای کسب درآمد آسان از ارزهای دیجیتال است. </p>
+              <p> بروکر ابرکوین به‌عنوان یکی از نخستین استارت‌آپ‌ها در حوزه آربیتراژ می‌باشد و کاربران می‌توانند کسب درآمد مطمئن و شفاف در حوزه ارزهای دیجیتال را با آن تجربه کنند </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="service-item first-service h-100">
+              <div class="icon"></div>
+              <h4> امنیت بالا </h4>
+              <p> در صرافی ابرکوین، تامین امنیت تک‌تک حساب‌های کاربران به عهده ماست. </p>
+              <!-- <div class="text-button">
+                <a href="#">بیشتر بدانید <i class="fa fa-arrow-right"></i></a>
+              </div> -->
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="service-item second-service h-100">
+              <div class="icon"></div>
+              <h4> گزارش‌دهی دقیق </h4>
+              <p> ما  به شما گزارشی دقیق و  کامل  از نوع معاملات، واریزی‌ها، برداشت‌ها  و درآمدها ارایه می‌دهیم. </p>
+              <!-- <div class="text-button">
+                <a href="#">بیشتر بدانید <i class="fa fa-arrow-right"></i></a>
+              </div> -->
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="service-item third-service h-100">
+              <div class="icon"></div>
+              <h4> واریز و برداشت ریالی و دلاری </h4>
+              <p> در ابرکوین، امکان واریز و برداشت آنی ریال و دلار (تتر) به آسان‌ترین شکل ممکن وجود دارد. </p>
+              <!-- <div class="text-button">
+                <a href="#">بیشتر بدانید <i class="fa fa-arrow-right"></i></a>
+              </div> -->
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="service-item fourth-service h-100">
+              <div class="icon"></div>
+              <h4>پشتیبانی ۲۴ ساعت </h4>
+              <p> ما به صورت ۲۴ ساعته، و در تمام روزهای هفته، پاسخگوی شما عزیزان هستیم. </p>
+              <!-- <div class="text-button">
+                <a href="#">بیشتر بدانید <i class="fa fa-arrow-right"></i></a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div id="about" class="about-us section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 align-self-center">
+            <div class="section-heading">
+              <h4> مراحل کار  ربات ابرکوین </h4>
+              <img src="../assets/images/heading-line-dec.png" alt="">
+              <p> افتخار ما این است که تمامی معاملات را در بستر شفاف برای کاربران خود به نمایش بگذارد و با موفقیت صددرصدی و تضمین‌شده، سود مناسب روزانه را به کاربران تقدیم کند. </p>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="box-item">
+                  <h4><a href="#"> مرحله اول </a></h4>
+                  <p> بررسی و دریافت نرخ ارزهای دیجیتال </p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="box-item">
+                  <h4><a href="#"> مرحله دوم </a></h4>
+                  <p> کمترین و بیشترین نرخ‌های موجود </p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="box-item">
+                  <h4><a href="#"> مرحله سوم </a></h4>
+                  <p> خرید ارز دیجیتال با قیمت پایین </p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="box-item">
+                  <h4><a href="#"> مرحله چهارم </a></h4>
+                  <p> فروش ارز دیجیتال با بالاترین نرخ </p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="box-item">
+                  <h4><a href="#"> مرحله پنجم </a></h4>
+                  <p> واریز سود حاصله از اختلاف قیمت به حساب کاربر </p>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <p> اصلی‌ترین امتیاز ابرکوین این است که اگر فرصت و یا حتی دانش فنی لازم برای  انجام معاملات ارز دیجیتال و حوزه بلاکچین را ندارید، ربات آربیتراژ‌‌ ابرکوین با بهترین استراتژی بصورت خودکار و اتوماتیک برای شما معامله می‌کند و بدون حتی یک‌درصد ریسک، شما را به سود ثابت و مناسب می‌رساند. </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="right-image">
+              <img src="../assets/images/about-right-dec.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <footer id="newsletter">
+      <div class="container">
+  
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="footer-widget">
+              <div class="d-block d-sm-none">
+                <br><br><br><br><br><br><br><br>
+              </div>
+              <h4>تماس باما</h4>
+              <p>شماره تماس 28423980 -021</p>
+              <p> واحد پشتیبانی: داخلی 1 </p>
+              <p> واحد فنی: داخلی 2 </p>
+              <p> واحد مالی و اداری: داخلی 3 </p>
+              <p> انتفاد و شکایات: داخلی 4 </p>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            
+          </div>
+          <div class="col-lg-3">
+            
+          </div>
+          <div class="col-lg-3">
+            <div class="footer-widget">
+              <h4>درباره ما</h4>
+              <div class="logo">
+                <img src="../assets/images/logo.png" width="150" alt="" style="max-width: 150px !important;">
+              </div>
+              <p> بروکر ابرکوین، با استفاده از ربات معامله‌گر آربیتراژ‌‌ و کادر مجرب و حرفه‌ای در زمینه رمز ارزها توانسته سیستمی امن و پرسود برای کسب سود از اختلاف قیمت‌ ارزها در صرافی‌ها راه‌اندازی کند و به صورت کاملا اتوماتیک اقدام به سودآوری برای کاربران خود نماید. </p>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>کپی رایت این صفحه برای ابرکوین محفوظ است. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+</template>
+
+<script>
+const body = document.getElementsByTagName("body")[0]
+import { useStore } from 'vuex'
+import { activateDarkMode, deactivateDarkMode } from "@/assets/js/dark-mode";
+// import "../assets/js/home/jquery/jquery.min.js"
+// import "../assets/js/home/custom.js"
+export default {
+  name: "Home",
+  setup(){
+    let store = useStore()
+
+    function menu_trigger(){
+      document.querySelector(".menu-trigger").classList.toggle("active")
+      document.querySelector(".header-area .nav").classList.toggle("d-block")
+    }
+
+    return { store, menu_trigger }
+  },
+  created() {
+      this.$store.state.showNavbar = false;
+      this.$store.state.showSidenav = false;
+      if (this.$store.state.darkMode){
+        deactivateDarkMode()
+      }
+      body.classList.remove("bg-gray-100");
+    },
+    beforeUnmount() {
+      this.$store.state.showNavbar = true;
+      this.$store.state.showSidenav = true;
+      if (this.$store.state.darkMode){
+        activateDarkMode()
+      }
+      body.classList.add("bg-gray-100");
+    },
+};
+</script>
+
+<style scoped>
+@import url(../assets/css/home.css);
+@import url(../assets/css/homeAnimated.css);
+@import url(../assets/css/homeCarousel.css);
+
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('../assets/vazir/Vazirmatn-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+*{
+  direction: rtl;
+  font-family: Vazirmatn;
+}
+
+</style>
