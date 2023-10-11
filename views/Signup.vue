@@ -95,7 +95,7 @@
                 
                 <div class="text-center">
                   <button class="btn mb-0 bg-gradient-success btn-md w-100 mt-2 mb-3" type="submit" id="authBtn"> تایید </button>
-                  <span class="mt-3 text-sm pointer px-2 py-1" @click="router.push('/dashboard')"> رد کردن </span>
+                  <span class="mt-3 text-sm pointer px-2 py-1" @click="router.push('/')"> رد کردن </span>
                 </div>
 
               </form>
@@ -115,6 +115,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { trans_num } from '../main.js'
 
 
 export default {
@@ -152,7 +153,7 @@ export default {
 
       axios
       .post('account/getOTP', {
-        phone_number: phoneNumber.value
+        phone_number: trans_num(phoneNumber.value)
       })
       .then(() => {
         btn.disabled = false
@@ -185,9 +186,9 @@ export default {
 
       axios
       .post('account/signup', {
-        phone_number: phoneNumber.value,
-					otp: otp.value,
-					password: password1.value
+        phone_number: trans_num(phoneNumber.value),
+        otp: trans_num(otp.value),
+        password: password1.value
       })
       .then((response) => {
         btn.disabled = false
@@ -237,12 +238,12 @@ export default {
       btn.innerHTML += '<div class="loader"></div>'
 
       axios.post("account/authenticator", {
-        code: inp.value
+        code: trans_num(inp.value)
       }).then(()=>{
         btn.disabled = false
         btn.innerHTML = btnInner
         inp.value = ""
-        router.push('/dashboard')
+        router.push('/')
       }).catch(()=>{
         btn.disabled = false
         btn.innerHTML = btnInner
@@ -251,7 +252,7 @@ export default {
     }
 
     return{ level, sendOTP, phoneNumber, timer, toggleEye, signup, password1, password2, 
-      otp, submitAuthenticator, router, totp_secret }
+      otp, submitAuthenticator, router, totp_secret, trans_num }
   }
 };
 </script>

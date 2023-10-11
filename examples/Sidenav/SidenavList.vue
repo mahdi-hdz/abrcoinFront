@@ -5,18 +5,18 @@
   >
     <ul class="navbar-nav">
       <li class="nav-item">
-        <router-link class="nav-link" to="/">
+        <a class="nav-link" href="https://abrcoin.com">
           <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
             <i class="fa fa-home text-sm text-info top-0"></i>
           </div>
           <span class="nav-link-text me-1"> صفحه اصلی </span>
-        </router-link>
+        </a>
       </li>
 
       <li class="nav-item">
         <sidenav-item
-          url="/dashboard"
-          :class="getRoute() === 'dashboard' ? 'active' : ''"
+          url="/"
+          :class="getRoute() === '' ? 'active' : ''"
           navText="داشبورد"
         >
           <template v-slot:icon>

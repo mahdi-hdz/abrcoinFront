@@ -93,6 +93,7 @@
 import axios from 'axios'
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
+import { trans_num } from '../main.js'
 
 export default {
   name: "Card",
@@ -165,7 +166,7 @@ export default {
       axios
       .post('card/add', {
         type: transType,
-        number: number.value,
+        number: trans_num(number.value),
       })
       .then(() => {
         getCards()
@@ -208,7 +209,7 @@ export default {
       }
     }
     
-    return { firstLoading , type, number, addCard, data, deleteCard, banks, check_bank, bank_src }
+    return { firstLoading , type, number, addCard, data, deleteCard, banks, check_bank, bank_src, trans_num }
   }
 };
 </script>

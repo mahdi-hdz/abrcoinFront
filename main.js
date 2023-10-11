@@ -12,7 +12,6 @@ import ArgonDashboard from "./argon-dashboard";
 import VueQRCodeComponent from 'vue-qrcode-component'
 
 axios.defaults.baseURL = 'https://api.abrcoin.com';
-// axios.defaults.baseURL = 'https://api.trademix.ir';
 
 axios.interceptors.response.use(
     (success) =>{
@@ -44,6 +43,16 @@ axios.interceptors.response.use(
       }
 })
 
+function trans_num(num){
+    try {
+        let res = num.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+        res.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+        return res
+    } catch {
+        return num
+    }
+}
+
 
 const appInstance = createApp(App);
 appInstance.use(store);
@@ -51,3 +60,5 @@ appInstance.use(router);
 appInstance.use(ArgonDashboard);
 appInstance.component('qr-code', VueQRCodeComponent)
 appInstance.mount("#app");
+
+export {trans_num}

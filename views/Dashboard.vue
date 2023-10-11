@@ -9,7 +9,7 @@
           <div class="col-lg-4 col-md-6 col-12">
             <card
               title="سود امروز"
-              :value="Math.round(today_profit/10).toLocaleString('fa-IR')"
+              :value="today_profit != null ? Math.round(today_profit/10).toLocaleString('fa-IR') : '-'"
               percentage="تومان"
               percentageColor=""
               iconClass="ni ni-money-coins"
@@ -21,7 +21,7 @@
           <div class="col-lg-4 col-md-6 col-12">
             <card
               title="سود ۳۰ روز گذشته"
-              :value="Math.round(past_30_profit/10).toLocaleString('fa-IR')"
+              :value="past_30_profit != null ? Math.round(past_30_profit/10).toLocaleString('fa-IR') : '-'"
               percentage="تومان"
               percentageColor=""
               iconClass="ni ni-world"

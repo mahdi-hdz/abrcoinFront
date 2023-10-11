@@ -114,6 +114,7 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { trans_num } from '../main.js'
 
 export default {
   name: "signin",
@@ -155,15 +156,15 @@ export default {
 
       axios
       .post('account/login', {
-          username: phoneNumber.value,
+          username: trans_num(phoneNumber.value),
           password: password.value,
-          totp: totp.value
+          totp: trans_num(totp.value)
       })
       .then(response => {
         btn.disabled = false
         btn.innerHTML = btnInner
         store.commit('login', [response.data.access, response.data.refresh])
-        router.push('/dashboard')
+        router.push('/')
         store.dispatch('onStart')
       })
       .catch(() => {
@@ -188,7 +189,7 @@ export default {
         }
 
         axios.post('account/smsSetPassword', {
-          phone_number: forgetPhone.value,
+          phone_number: trans_num(forgetPhone.value),
           otp: document.getElementById("resetOtp").value,
           new_password: document.getElementById("passwordSms").value
         }).then(()=>{
@@ -210,7 +211,7 @@ export default {
         axios
         .post('account/forgetPassword', {
           type: 'sms',
-          phone_number: forgetPhone.value
+          phone_number: trans_num(forgetPhone.value)
         })
         .then(() => {
           btn.disabled = false
@@ -241,7 +242,7 @@ export default {
     }
 
     return { toggleEye, login, phoneNumber, password, totp, forgetEmail, forgetPassword, 
-      reset_type, forgetPhone, reset_sms_sent }
+      reset_type, forgetPhone, reset_sms_sent, trans_num }
   }
 };
 </script>

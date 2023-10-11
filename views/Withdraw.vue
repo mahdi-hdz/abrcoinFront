@@ -16,11 +16,11 @@
                               <div class="d-flex flex-column">
                                 <span class="mb-3 text-sm">
                                     شناسه:
-                                  <span class="text-dark font-weight-bold ms-sm-2" dir="ltr"> #{{String(withdraw.ref_id).toLocaleString('fa-IR')}} </span>
+                                  <span class="text-dark font-weight-bold ms-sm-2" dir="ltr"> #{{withdraw.ref_id.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])}} </span>
                                 </span>
                                 <span class="mb-3 text-sm">
                                   مقدار:
-                                  <span class="text-dark ms-sm-2 font-weight-bold"> {{withdraw.amou10}} تومان </span>
+                                  <span class="text-dark ms-sm-2 font-weight-bold"> {{Math.round(withdraw.amount/10).toLocaleString('fa-IR')}} تومان </span>
                                 </span>
                                 <span class="mb-3 text-sm">
                                   آدرس:
@@ -91,7 +91,7 @@
                               <input type="text" class="form-control" :class="{'invalid' : amount*10 > store.state.profile.balance }" v-model="amount">
                               <button type="button" class="pointer btn btn-xs bg-gradient-success py-1 px-2 eye-absolute" @click="amount = store.state.profile.balance/10"> کل موجودی </button>
                             </div>
-                            <div class="me-3 mt-2 text-xs font-weight-bold text-dark"> {{ Number(amount).toLocaleString('fa-IR') }} تومان معادل {{ Number((amount * 10 / parseInt(usdtPrice)).toFixed(1)).toLocaleString('fa-IR') }} USDT </div>
+                            <div class="me-3 mt-2 text-xs font-weight-bold text-dark"> {{ Number(trans_num(amount)).toLocaleString('fa-IR') }} تومان معادل {{ Number((trans_num(amount) * 10 / parseInt(usdtPrice)).toFixed(1)).toLocaleString('fa-IR') }} USDT </div>
                             
                             </div>
                             <div class="text-danger text-sm text-center mt-3" style="visibility: hidden;"
@@ -156,7 +156,7 @@
                             <input type="text" class="form-control" :class="{'invalid' : amount * 10 > store.state.profile.balance }" v-model="amount">
                             <button type="button" class="pointer btn btn-xs bg-gradient-success py-1 px-2 eye-absolute" @click="amount = store.state.profile.balance / 10"> کل موجودی </button>
                           </div>
-                          <div class="me-3 mt-2 text-xs font-weight-bold text-dark"> {{ Number(amount).toLocaleString('fa-IR') }} تومان معادل {{ Number((amount * 10 / parseInt(usdtPrice)).toFixed(1)).toLocaleString('fa-IR') }} USDT </div>
+                          <div class="me-3 mt-2 text-xs font-weight-bold text-dark"> {{ Number(trans_num(amount)).toLocaleString('fa-IR') }} تومان معادل {{ Number((trans_num(amount) * 10 / parseInt(usdtPrice)).toFixed(1)).toLocaleString('fa-IR') }} USDT </div>
                               
                           </div>
                           <div class="text-danger text-sm text-center mt-3" style="visibility: hidden;"
@@ -178,7 +178,7 @@
                           </div>
                           <div class="bg-gray-100 py-2 rounded border row m-0" v-for="card, index in cardData" :key="index">
                               <div class="col">
-                                  <p class="font-weight-bold text-sm text-dark"> {{ card.number }} </p>
+                                  <p class="font-weight-bold text-sm text-dark"> {{ card.number.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]) }} </p>
                                   <p class="text-xs" v-if="card.type == 'Card'"> شماره کارت </p>
                                   <p class="text-xs" v-else> شماره شبا </p>
                               </div>
@@ -224,6 +224,7 @@ import axios from 'axios'
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
 import { useStore } from 'vuex'
+import { trans_num } from '../main.js'
 
 export default{
     setup(){
@@ -308,7 +309,7 @@ export default{
 
         Swal.fire({
           title: 'درخواست برداشت را تایید میکنید؟ ',
-          text: `درخواست برداشت ${(Number(amount.value)).toLocaleString('fa-IR')} تومان به ولت ${wallet.address} (${wallet.name})`,
+          text: `درخواست برداشت ${(Number(trans_num(amount.value))).toLocaleString('fa-IR')} تومان به ولت ${wallet.address} (${wallet.name})`,
           showDenyButton: true,
           showCancelButton: false,
           confirmButtonText: 'بلی',
@@ -318,7 +319,7 @@ export default{
                 firstLoading.value = true
 
                 axios.post('financial/createWithdraw', {
-                amount: amount.value * 10,
+                amount: trans_num(amount.value) * 10,
                 wallet_id: wallet.id,
                 type: "crypto"
                 })
@@ -339,7 +340,7 @@ export default{
 
         Swal.fire({
           title: 'درخواست برداشت را تایید میکنید؟ ',
-          text: `درخواست برداشت ${(Number(amount.value)).toLocaleString('fa-IR')} تومان به ${card.type == 'Shaba' ? 'شماره شبا' : 'شماره کارت'} ${card.number}`,
+          text: `درخواست برداشت ${(Number(trans_num(amount.value))).toLocaleString('fa-IR')} تومان به ${card.type == 'Shaba' ? 'شماره شبا' : 'شماره کارت'} ${card.number.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])}`,
           showDenyButton: true,
           showCancelButton: false,
           confirmButtonText: 'بلی',
@@ -349,7 +350,7 @@ export default{
                 firstLoading.value = true
 
                 axios.post('financial/createWithdraw', {
-                amount: amount.value * 10,
+                amount: trans_num(amount.value) * 10,
                 card_id: card.id,
                 type: "rial"
                 })
@@ -391,7 +392,7 @@ export default{
 
       return { firstLoading, data, amount, step, store, createWithdraw, getWallets, 
         walletData, confirmWithdraw, phone_otp, submited_phone, email_otp, submited_email,
-        confirmLoading, withdraw_type, createRialWithdraw, cardData, getCards, usdtPrice }
+        confirmLoading, withdraw_type, createRialWithdraw, cardData, getCards, usdtPrice, trans_num }
     }
 }
 

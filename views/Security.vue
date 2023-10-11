@@ -106,7 +106,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import Swal  from 'sweetalert2';
-
+import { trans_num } from '../main.js'
 
 
 export default {
@@ -151,7 +151,7 @@ export default {
             btn.innerHTML += '<div class="loader"></div>'
             
             axios.post("account/authenticator", {
-                code: inp.value
+                code: trans_num(inp.value)
             }).then(()=>{
                 btn.disabled = false
                 btn.innerHTML = btnInner
@@ -176,7 +176,7 @@ export default {
             let btnInner = btn.innerHTML
             btn.disabled = true
             btn.innerHTML += '<div class="loader"></div>'
-            axios.delete(`account/authenticator?code=${inp.value}`).then(()=>{
+            axios.delete(`account/authenticator?code=${trans_num(inp.value)}`).then(()=>{
                 Swal.fire("Google Authenticator حساب شما با غیرفعال شد.", "", "success")
                 btn.disabled = false
                 btn.innerHTML = btnInner
@@ -199,7 +199,7 @@ export default {
             let btnInner = btn.innerHTML
             btn.disabled = true
             btn.innerHTML += '<div class="loader"></div>'
-            axios.delete(`account/authenticator?code=${inp.value}`).then(()=>{
+            axios.delete(`account/authenticator?code=${trans_num(inp.value)}`).then(()=>{
                 Swal.fire("QR Code جدید را اسکن کرده و کد آن را وارد کنید.", "", "info")
                 btn.disabled = false
                 btn.innerHTML = btnInner
@@ -246,7 +246,7 @@ export default {
             el.parentElement.lastElementChild.classList.toggle("fa-eye-slash")
         }
         
-        return { data, submitAuthenticator, changePassword, password, newPass1,
+        return { data, submitAuthenticator, changePassword, password, newPass1, trans_num,
             newPass2, firstLoading, resetAuthenticator, deleteAuthenticator, toggleEye }
         }
     }

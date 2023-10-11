@@ -195,6 +195,7 @@ import axios from 'axios';
 import Swal  from 'sweetalert2';
 const body = document.getElementsByTagName("body")[0];
 import { activateDarkMode, deactivateDarkMode } from "@/assets/js/dark-mode";
+import { trans_num } from '../main.js'
 
 
 export default {
@@ -293,7 +294,7 @@ export default {
       
       formData.append('first_name', document.getElementById("firstNameInp").value)
       formData.append('last_name', document.getElementById("lastNameInp").value)
-      formData.append('id_number', document.getElementById("idInp").value)
+      formData.append('id_number', trans_num(document.getElementById("idInp").value))
       formData.append('email', document.getElementById("emailInp").value)
       formData.append('id_card_photo', frontPic.files[0])
       
@@ -339,7 +340,7 @@ export default {
     
 
     return { firstLoading, data, imageSelected, front_id_card, toggleEye,
-      submit_authentication, showPatient, verifyEmail, image_big}
+      submit_authentication, showPatient, verifyEmail, image_big, trans_num}
   }
 };
 </script>

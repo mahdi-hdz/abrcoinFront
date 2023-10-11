@@ -91,8 +91,8 @@
                           <div v-if="gatewaySelected == 'zarinpal'" class="col-md-8 col-lg-12 col-xxl-7 mx-auto">
                             <label for="example-text-input" class="form-control-label"> مبلغ (تومان) </label>
                             <input v-model="amount" class="form-control form-control-default" type="text" maxlength="11"/>
-                            <span class="text-sm mb-3 d-inline-block"> {{ Number(amount).toLocaleString('fa-IR') }} تومان معادل {{ ((amount * 10 / parseInt(usdtPrice)).toFixed(1)).toLocaleString('fa-IR') }} USDT </span>
-                            <p class="text-sm text-danger" v-if="5000000 > amount"> حداقل واریز ریالی ۵ میلیون تومان می باشد </p>
+                            <span class="text-sm mb-3 d-inline-block"> {{ Number(trans_num(amount)).toLocaleString('fa-IR') }} تومان معادل {{ ((trans_num(amount) * 10 / parseInt(usdtPrice)).toFixed(1)).toLocaleString('fa-IR') }} USDT </span>
+                            <p class="text-sm text-danger" v-if="5000000 > trans_num(amount)"> حداقل واریز ریالی ۵ میلیون تومان می باشد </p>
                           </div>
                           
                           <div v-if="gatewaySelected == 'crypto'" class="col-md-8 col-lg-12 col-xxl-7 mx-auto">
@@ -164,6 +164,7 @@
 import axios from 'axios'
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
+import { trans_num } from '../main.js'
 
 
 export default{
@@ -198,7 +199,7 @@ export default{
         btn.innerHTML += '<div class="loader"></div>'
 
         axios.post('financial/deposit', {
-          amount: amount.value * 10,
+          amount: trans_num(amount.value) * 10,
           gateway: gatewaySelected.value
         })
         .then((res) => {
@@ -262,7 +263,7 @@ export default{
 
       getDeposits()
 
-      return { firstLoading, data, amount, gatewaySelected, currencySelected, 
+      return { firstLoading, data, amount, gatewaySelected, currencySelected, trans_num,
         zarinPay, cryptoPay, generatedAddress, copyItem, submitHash, hash, usdtPrice }
     }
 }

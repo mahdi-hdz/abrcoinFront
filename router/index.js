@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import store from '../store'
 
 
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Robot from "../views/Robot.vue";
 import Wallet from "../views/Wallet.vue";
@@ -17,46 +17,19 @@ import ResetPassword from "../views/ResetPassword.vue";
 import VerifyPay from "../views/VerifyPay.vue";
 import Support from "../views/Support.vue";
 import SingleTicket from "../views/SingleTicket.vue";
-import Faq from "../views/Faq.vue";
-import Rules from "../views/Rules.vue";
-import Contact from "../views/Contact.vue";
-import Training from "../views/Training.vue";
+// import Faq from "../views/Faq.vue";
+// import Rules from "../views/Rules.vue";
+// import Contact from "../views/Contact.vue";
+// import Training from "../views/Training.vue";
 
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
-    meta: { loginRedirect: false, loginRequired: false }
-    // redirect: "/dashboard",
-  },
-  {
-    path: "/faq",
-    name: "Faq",
-    component: Faq,
-    meta: { loginRedirect: false, loginRequired: false }
-  },
-  {
-    path: "/rules",
-    name: "Rules",
-    component: Rules,
-    meta: { loginRedirect: false, loginRequired: false }
-  },
-  {
-    path: "/contact",
-    name: "Contact",
-    component: Contact,
-    meta: { loginRedirect: false, loginRequired: false }
-  },
-  {
-    path: "/training",
-    name: "Training",
-    component: Training,
-    meta: { loginRedirect: false, loginRequired: false }
-  },
-  {
     path: "/dashboard",
+    redirect: "/"
+  },
+  {
+    path: "/",
     name: "Dashboard",
     component: Dashboard,
     meta: { loginRequired: true }
@@ -162,7 +135,7 @@ router.beforeEach((to, from, next) => {
     }
   }else if (to.matched.some(record => record.meta.loginRedirect)) {
     if (store.state.isAuthenticated) {
-      next("/dashboard")
+      next("/")
     } else {
       next()
     }

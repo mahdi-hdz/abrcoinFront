@@ -10,7 +10,7 @@
             <div class="text-muted">(اگر صفحه را رفرش کردید باید مجددا روی لینک بازیابی ایمیل شده کلیک کنید)</div>
             
             <br><hr>
-            <router-link to="/" class="btn btn-primary"> رفتن به صفحه اصلی <i class="fa fa-home ms-2"></i> </router-link>
+            <a href="https://abrcoin.com" class="btn btn-primary"> رفتن به صفحه اصلی <i class="fa fa-home ms-2"></i> </a>
         </div>
         
         <form v-else @submit.prevent="resetPassword">

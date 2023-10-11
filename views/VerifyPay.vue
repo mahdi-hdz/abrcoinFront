@@ -17,7 +17,7 @@
                 <!-- <p class="text-muted">( درصورتی که پول از حسابتان کم شده تا دقایقی دیگر بازمیگردد )</p> -->
             </div>
             <hr class="col-10 col-sm-8 col-md-5 col-lg-3 mx-auto">
-            <router-link to="/" class="btn btn-primary mt-4"> رفتن به صفحه اصلی <i class="fa fa-home ms-2"></i> </router-link><br>
+            <a href="https://abrcoin.com" class="btn btn-primary mt-4"> رفتن به صفحه اصلی <i class="fa fa-home ms-2"></i> </a><br>
         </div>
 
     </div>
