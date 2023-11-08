@@ -21,7 +21,8 @@ export default createStore({
     showSidenav: true,
     showNavbar: true,
     showMain: true,
-    layout: "default"
+    layout: "default",
+    userInvests: []
   },
   mutations: {
     toggleConfigurator(state) {
@@ -63,9 +64,7 @@ export default createStore({
       axios.defaults.headers.common['Authorization'] = ""
       localStorage.removeItem("access")
       localStorage.removeItem("refresh")
-      if(router.currentRoute.value.fullPath != '/'){
-        router.push("/signin")
-      }
+      router.push("/signin")
     },
   },
   actions: {

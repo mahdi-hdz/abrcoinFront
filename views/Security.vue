@@ -126,7 +126,6 @@ export default {
             .then((res) => {
                 data.value = res.data.data
                 firstLoading.value = false
-                console.log(res.data);
             })
             .catch(() => {
                 firstLoading.value = false

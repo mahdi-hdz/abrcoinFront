@@ -84,14 +84,13 @@
                                     <span class="radio-label mb-3"> کریپتو </span>
                                 </span>
                             </label>
-
-                            
-                          </div>
+                        </div>
+                        
                         <div class="mt-5">
                           <div v-if="gatewaySelected == 'zarinpal'" class="col-md-8 col-lg-12 col-xxl-7 mx-auto">
                             <label for="example-text-input" class="form-control-label"> مبلغ (تومان) </label>
                             <input v-model="amount" class="form-control form-control-default" type="text" maxlength="11"/>
-                            <span class="text-sm mb-3 d-inline-block"> {{ Number(trans_num(amount)).toLocaleString('fa-IR') }} تومان معادل {{ ((trans_num(amount) * 10 / parseInt(usdtPrice)).toFixed(1)).toLocaleString('fa-IR') }} USDT </span>
+                            <span class="text-sm mb-3 d-inline-block"> {{ Number(trans_num(amount)).toLocaleString('fa-IR') }} تومان معادل {{ Number((trans_num(amount) * 10 / parseInt(usdtPrice)).toFixed(1)).toLocaleString('fa-IR') }} USDT </span>
                             <p class="text-sm text-danger" v-if="5000000 > trans_num(amount)"> حداقل واریز ریالی ۵ میلیون تومان می باشد </p>
                           </div>
                           
@@ -100,7 +99,7 @@
                             <select name="newFinanType" id="newFinanType" class="form-control mb-3" v-model="currencySelected">
                               <option value="انتخاب کنید" selected hidden> انتخاب کنید </option>
                               <!-- <option value="trx"> Tron (TRX) </option> -->
-                              <option value="usdt"> Tether (USDT) </option>
+                              <option value="usdt"> Tether (USDT - TRC20) </option>
                             </select>
                             <p class="text-sm text-danger"> دقت کنید که حداقل مبلغ واریز کوین باید ۱۰۰ تتر باشد </p>
                           </div>
@@ -113,7 +112,8 @@
                         <div v-if="gatewaySelected == 'crypto'" class="text-center mt-4">
                           <button @click="cryptoPay" class="btn btn-success btn-sm font-iran" id="cryptoBtn"> ساخت آدرس بلاکچین </button>
                         </div>
-                        <p class="text-xs"> توجه داشته باشید که در واریز های کریپتو بصورت خودکار و در لحظه حساب شما شارژ میشود و در واریز های ریالی پس از تایید ادمین این عمل حداکثر ظرف ۲۴ ساعت کاری انجام میشود. </p>
+                        <!-- <p class="text-xs"> توجه داشته باشید که در واریز های کریپتو بصورت خودکار و در لحظه حساب شما شارژ میشود و در واریز های ریالی پس از تایید ادمین این عمل حداکثر ظرف ۲۴ ساعت کاری انجام میشود. </p> -->
+                        <p class="text-xs"> در واریز های کریپتو بصورت خودکار و در لحظه حساب شما شارژ میشود. </p>
 
                     </div>
 

@@ -63,7 +63,7 @@
         <form @submit.prevent="forgetPassword" class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5"> فراموشی رمزعبور </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button type="button" class="bg-transparent border-0" data-bs-dismiss="modal"><i class="fa fa-times fs-5"></i></button>
           </div>
           <div class="modal-body">
             <div class="text-center mt-3 mb-4" v-if="!reset_sms_sent">

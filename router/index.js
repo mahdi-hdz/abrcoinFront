@@ -17,6 +17,8 @@ import ResetPassword from "../views/ResetPassword.vue";
 import VerifyPay from "../views/VerifyPay.vue";
 import Support from "../views/Support.vue";
 import SingleTicket from "../views/SingleTicket.vue";
+import Investment from "../views/Investment.vue";
+import NewInvestment from "../views/NewInvestment.vue";
 // import Faq from "../views/Faq.vue";
 // import Rules from "../views/Rules.vue";
 // import Contact from "../views/Contact.vue";
@@ -102,6 +104,18 @@ const routes = [
     path: '/support',
     name: 'Support',
     component: Support,
+    meta: { loginRequired: true }
+  },
+  {
+    path: '/investment/:id?',
+    name: 'Investment',
+    component: Investment,
+    meta: { loginRequired: true }
+  },
+  {
+    path: '/investment/new',
+    name: 'NewInvestment',
+    component: NewInvestment,
     meta: { loginRequired: true }
   },
   {

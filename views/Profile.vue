@@ -133,6 +133,7 @@
 
                     <i class="absolute-center fal fa-id-card" style="font-size: 75px;"></i>
                   </div>
+                  <span class="text-xs"> حداکثر حجم تصویر: ۴ مگابایت </span>
                 </div>
 
                 <div class="col-md-6" v-show="front_id_card">
@@ -168,7 +169,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel"> راهنمای تصویر احراز هویت </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="bg-transparent border-0" data-bs-dismiss="modal"><i class="fa fa-times fs-5"></i></button>
         </div>
         <div class="modal-body">
           <p class=""> متن تعهدنامه (متن زیر) را روی کاغذ نوشته و امضا کنید, و همراه با کارت ملی <small>(یا سایر مدارک شناسایی معتبر)</small> در دست گرفته و یک سلفی مطابق نمونه بارگذاری نمایید. </p>
@@ -177,7 +178,7 @@
           <p class="text-sm mt-3"> (اطمینان داشته باشید که عکس و اطلاعات شما در اختیار شخص یا اشخاص دیگر قرار نخواهد گرفت و صرفا جهت احراز هویت شما در سایت ابرکوین می باشد.) </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">متوجه شدم</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">متوجه شدم</button>
         </div>
       </div>
     </div>
@@ -249,7 +250,7 @@ export default {
         data.value = res.data.data
         if(data.value.authentication_status != 'No'){
           data.value.phone_number = data.value.phone_number.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
-          data.value.id_number = data.value.phone_number.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
+          data.value.id_number = String(data.value.id_number).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
         }
         firstLoading.value = false
       })

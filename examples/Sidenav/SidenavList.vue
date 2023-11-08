@@ -24,6 +24,40 @@
           </template>
         </sidenav-item>
       </li>
+
+      <li class="nav-item" id="inverstSideLink">
+        <sidenav-item
+          url="/investment"
+          :class="getRoute() === 'investment' ? 'active' : ''"
+          navText="صندوق سپرده گذاری">
+          <template v-slot:icon>
+            <i class="fa fa-sack-dollar text-dark text-sm"></i>
+          </template>
+        </sidenav-item>
+        <span v-if="getRoute() === 'investment'">
+          
+          <sidenav-item
+            v-for="invest, index in store.state.userInvests"
+            :key="index"
+            :url="'/investment/'+invest.id"
+            :class="`${getRoute() === 'investment' && getIdParam() == invest.id ? 'child-active-link' : ' active'}
+            ${invest.is_done ? 'is_done_invest' : '' }`"
+            class="me-4"
+            :navText="invest.name">
+          </sidenav-item>
+          
+          <sidenav-item
+            url="/investment/new"
+            class="me-4 border-top"
+            :class="route.fullPath === '/investment/new' ? 'child-active-link' : 'active'">
+            <template v-slot:icon>
+              <span class="ps-2 text-xs text-dark" style="margin-right: 150px;"> ایجاد صندوق </span>
+              <i class="fa fa-plus text-dark text-sm"></i>
+            </template>
+          </sidenav-item>
+
+        </span>
+      </li>
       
       <li class="nav-item">
         <sidenav-item
@@ -133,9 +167,6 @@
 
     </ul>
   </div>
-  <div class="pt-3 mx-3 mt-3 sidenav-footer">
-
-  </div>
 </template>
 <script>
 import SidenavItem from "./SidenavItem.vue";
@@ -161,11 +192,29 @@ export default {
       const routeArr = route.path.split("/")
       return routeArr[1];
     }
+    function getIdParam() {
+      return route.params.id;
+    }
 
-    return { logout, getRoute }
+    return { logout, getRoute, getIdParam, store, route }
   },
   components: {
     SidenavItem
   },
 };
 </script>
+
+<style>
+
+.child-active-link{
+  background-color: rgba(46, 205, 137, 0.5) !important;
+}
+
+.is_done_invest::after{
+  content: "*";
+  color: red;
+  font-size: 18px;
+  margin-right: 10px !important;
+}
+
+</style>

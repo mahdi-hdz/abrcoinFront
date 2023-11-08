@@ -122,23 +122,15 @@
 
                         <div class="row m-0 pb-4" v-if="step == 3">
                             <p class="text-sm font-weight-bold text-dark text-center mb-4 pb-2"> 
-                                برای انجام برداشت کدهای تایید پیامک و ایمیل شده را وارد کنید. 
+                              برای انجام برداشت کد تایید پیامک  شده را وارد کنید. 
+                                <!-- برای انجام برداشت کدهای تایید پیامک و ایمیل شده را وارد کنید.  -->
                                 <span class="text-xs text-secondary"> (درصورت عدم دریافت مجدد مراحل را انجام دهید) </span>
                             </p>
-                            <div class="col-lg-6 position-relative">
+                            <div class="col-lg-12 position-relative">
                                 <label for="example-text-input" class="form-control-label"> کد تایید پیامک: </label> 
                                 <input class="form-control mb-3" v-model="phone_otp" type="text" :disabled="submited_phone" :class="{'submited-inp' :submited_phone}"/>
                                 <button class="btn btn-success btn-sm px-2 absolute-btn noDisabled" 
-                                @click="confirmWithdraw('phone')" :disabled="phone_otp.length != 6 || submited_phone"> 
-                                    تایید
-                                    <div v-if="confirmLoading" class="loader"></div>
-                                </button>
-                            </div>
-                            <div class="col-lg-6 position-relative">
-                                <label for="example-text-input" class="form-control-label"> کد تایید ایمیل: </label> 
-                                <input class="form-control mb-3" v-model="email_otp" type="text" :disabled="submited_email" :class="{'submited-inp' :submited_email}"/>
-                                <button class="btn btn-success btn-sm px-2 absolute-btn noDisabled"
-                                @click="confirmWithdraw('email')" :disabled="email_otp.length != 6 || submited_email">
+                                @click="confirmWithdraw" :disabled="phone_otp.length != 6 || submited_phone"> 
                                     تایید
                                     <div v-if="confirmLoading" class="loader"></div>
                                 </button>
@@ -188,23 +180,15 @@
 
                       <div class="row m-0 pb-4" v-if="step == 3">
                           <p class="text-sm font-weight-bold text-dark text-center mb-4 pb-2"> 
-                              برای انجام برداشت کدهای تایید پیامک و ایمیل شده را وارد کنید. 
+                            برای انجام برداشت کد تایید پیامک  شده را وارد کنید. 
+                              <!-- برای انجام برداشت کدهای تایید پیامک و ایمیل شده را وارد کنید.  -->
                               <span class="text-xs text-secondary"> (درصورت عدم دریافت مجدد مراحل را انجام دهید) </span>
                           </p>
-                          <div class="col-lg-6 position-relative">
+                          <div class="col-lg-12 position-relative">
                               <label for="example-text-input" class="form-control-label"> کد تایید پیامک: </label> 
                               <input class="form-control mb-3" v-model="phone_otp" type="text" :disabled="submited_phone" :class="{'submited-inp' :submited_phone}"/>
                               <button class="btn btn-success btn-sm px-2 absolute-btn noDisabled" 
-                              @click="confirmWithdraw('phone')" :disabled="phone_otp.length != 6 || submited_phone"> 
-                                  تایید
-                                  <div v-if="confirmLoading" class="loader"></div>
-                              </button>
-                          </div>
-                          <div class="col-lg-6 position-relative">
-                              <label for="example-text-input" class="form-control-label"> کد تایید ایمیل: </label> 
-                              <input class="form-control mb-3" v-model="email_otp" type="text" :disabled="submited_email" :class="{'submited-inp' :submited_email}"/>
-                              <button class="btn btn-success btn-sm px-2 absolute-btn noDisabled"
-                              @click="confirmWithdraw('email')" :disabled="email_otp.length != 6 || submited_email">
+                              @click="confirmWithdraw" :disabled="phone_otp.length != 6 || submited_phone"> 
                                   تایید
                                   <div v-if="confirmLoading" class="loader"></div>
                               </button>
@@ -237,7 +221,6 @@ export default{
       let cardData = ref([])
       let phone_otp = ref('')
       let submited_phone = ref(false)
-      let email_otp = ref('')
       let submited_email = ref(false)
       let withdraw_id = ref()
       let confirmLoading = ref(false)
@@ -366,16 +349,14 @@ export default{
         })
       }
 
-      function confirmWithdraw(otp_type){
-			let data = otp_type == "email" ? {"withdraw_id": withdraw_id.value, "email_otp": email_otp.value} : {"withdraw_id": withdraw_id.value, "phone_otp": phone_otp.value}
+      function confirmWithdraw(){
 			confirmLoading.value = true
-			axios.post("financial/confirmWithdraw", data).then((res)=>{
+			axios.post("financial/confirmWithdraw", {
+        "withdraw_id": withdraw_id.value,
+        "phone_otp": phone_otp.value
+        }).then((res)=>{
 				confirmLoading.value = false
-				if(otp_type == 'email'){
-					submited_email.value = true
-				}else{
-					submited_phone.value = true
-				}
+        submited_phone.value = true
 				if (res.status == 201){
           amount.value = null
           firstLoading.value = true
@@ -391,7 +372,7 @@ export default{
       getWithdraws()
 
       return { firstLoading, data, amount, step, store, createWithdraw, getWallets, 
-        walletData, confirmWithdraw, phone_otp, submited_phone, email_otp, submited_email,
+        walletData, confirmWithdraw, phone_otp, submited_phone, submited_email,
         confirmLoading, withdraw_type, createRialWithdraw, cardData, getCards, usdtPrice, trans_num }
     }
 }

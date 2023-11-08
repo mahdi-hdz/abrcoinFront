@@ -11,7 +11,8 @@ import axios from 'axios'
 import ArgonDashboard from "./argon-dashboard";
 import VueQRCodeComponent from 'vue-qrcode-component'
 
-axios.defaults.baseURL = 'https://api.abrcoin.com';
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
+// axios.defaults.baseURL = 'https://api.abrcoin.com';
 
 axios.interceptors.response.use(
     (success) =>{

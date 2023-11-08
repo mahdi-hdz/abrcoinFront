@@ -66,6 +66,7 @@
                   <input class="form-control mb-3" type="password" id="password2" placeholder="تکرار رمز عبور" v-model="password2"/>
                   <i class="fa fa-eye eye-absolute" @click="toggleEye('password2')"></i>
                 </div>
+                <span class="text-xs"> رمزعبور باید حداقل دارای ۸ کاراکتر شامل (حروف کوچک, بزرگ و عدد) باشد. اکیدا توصیه میشود از حروف خاص مانند (@#$%^&_*?!) هم در رمز خود استفاده کنید. </span>
                 
                 <div class="text-center">
                   <button class="btn mb-0 bg-gradient-dark btn-md w-100 null mt-2" type="submit" id="submitBtn2"> تایید </button>
@@ -174,7 +175,6 @@ export default {
         Swal.fire("", "پسورد های وارد شده مطابقت ندارند", "error")
         return
       }
-      console.log(otp);
       if(otp.value.length != 6){
         Swal.fire("", "کد تایید ۶ رقمی را وارد کنید", "error")
         return
@@ -216,7 +216,6 @@ export default {
     function toggleEye(id){
       let el = document.getElementById(id)
       el.type == 'password' ? el.type = 'text' : el.type = 'password'
-      console.log(el.parentElement.lastElementChild);
       el.parentElement.lastElementChild.classList.toggle("fa-eye-slash")
     }
 

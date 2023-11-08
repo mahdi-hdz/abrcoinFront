@@ -203,7 +203,6 @@ export default {
       let num = number.value.slice(0,6)
       if(banks[num]){
         bank_src.value = require(`@/assets/banks/${banks[num]}.png`)
-        console.log(`@/assets/banks/${banks[num]}.png`);
       }else{
         bank_src.value = null
       }

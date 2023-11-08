@@ -121,7 +121,6 @@ export default {
     function getData(){
       axios.get('/trade/bot')
       .then((res) => {
-        console.log(res.data.data);
         data.value = res.data.data
         table.value = res.data.table
         firstLoading.value = false

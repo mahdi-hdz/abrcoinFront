@@ -51,7 +51,11 @@
             </div>
           </div>
           <div class="col-lg-4">
-            <ConsumptionRoomChart/>
+            <div class="card">
+              <div class="card-body p-3" style="margin-top: 40px;">
+                <ConsumptionRoomChart abrcoin_stock="40" user_stock="60"/>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row mt-4">
@@ -81,7 +85,7 @@
                     <tr v-for="(trd, index) in data" :key="index">
                       <td class="text-sm py-3 text-end pe-4"> #{{trd.order_id.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])}} </td>
                       <td class="text-sm py-3"> 
-                        <i v-if="trd.profit_percent > 0" class="fa fa-arrow-up text-success ms-2"></i>
+                        <i v-if="trd.user_profit > 0" class="fa fa-arrow-up text-success ms-2"></i>
                         <i v-else class="fa fa-arrow-down text-danger ms-2"></i>
                         {{ trd.symbol }} 
                       </td>
@@ -90,8 +94,9 @@
                       <td class="text-sm py-3"> {{ Math.round(trd.beg_price/10).toLocaleString('fa-IR') }} تومان </td>
                       <td class="text-sm py-3"> {{ trd.des_price.toLocaleString('fa-IR') }}$ </td>
                       <td class="text-sm py-3"> {{ Math.round(trd.usdt_price/10).toLocaleString('fa-IR') }} تومان </td>
-                      <td class="text-sm py-3" dir="ltr" style="direction: ltr; text-align: end;"> 
-                        {{ new Date(trd.created_at).toLocaleString('fa-IR').slice(0, -3) }} 
+                      <td class="text-sm py-3" dir="ltr" style="direction: ltr;"> 
+                        {{ new Date(trd.created_at).toLocaleString('fa-IR').split(",")[0] }} 
+                        <!-- {{ new Date(trd.created_at).toLocaleString('fa-IR').slice(0, -3) }}  -->
                       </td>
                       <td class="text-sm py-3"> {{ trd.profit_percent.toLocaleString('fa-IR') }}% </td>
                     </tr>
@@ -128,7 +133,7 @@ export default {
     let past_30_profit = ref()
     let lastShow = 0
     let showMore = ref(true)
-    let totalProfit = ref()
+    let totalProfit = ref(0)
 
     function getChartData(){
       axios.get('/trade/chart')
@@ -136,7 +141,6 @@ export default {
         chartData.value = res.data.chart
         today_profit.value = res.data.today_profit
         past_30_profit.value = res.data.past_30_profit
-        console.log(res.data.total_profit);
         totalProfit.value = res.data.total_profit
         firstLoading.value = false
       })
@@ -172,6 +176,8 @@ export default {
         if(res.data.data.length < 10){
           showMore.value = false
         }
+      }).catch((res)=>{
+        console.log(res);
       })
     }
 
